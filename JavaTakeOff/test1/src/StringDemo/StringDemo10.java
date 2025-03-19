@@ -18,6 +18,10 @@ public class StringDemo10 {
                 break;
             }
         }
+        /*
+        字符串截取
+        string.substring();
+        * */
 
         //截取前三位
         String start = phoneNumber.substring(0,3);//(包头不包尾)
