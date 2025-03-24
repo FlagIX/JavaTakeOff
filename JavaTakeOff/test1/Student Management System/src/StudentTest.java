@@ -255,18 +255,22 @@ public class StudentTest {
     //判断用户名的合法性
     public static boolean containsUsernameRight(String username){
         int countnum = 0;
+        int countchar = 0;
         if(username.length()>=3&&username.length()<=15){
             for (int i = 0; i < username.length(); i++) {
                 char c = username.charAt(i);
-                if(c>=48&&c<=57){
+                if(c>='0'&&c<='9'){
                     countnum++;
-                }else if(!(c>=65&&c<=90)&&!(c>=97&&c<=122)){
+
+                } else if (c>='A'&&c<='Z'&&c>='a'&&c<='z') {
+                    countchar++;
+                } else{
                     return false;
                 }
             }
-            //纯数字
-            if(countnum == username.length()){
-
+            //不能纯数字或者纯字母
+            if(countnum == username.length()||countchar == username.length()){
+                return false;
             }else {
                 return true;
             }
