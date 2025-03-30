@@ -1,0 +1,7 @@
+package a01interfacedemo3;
+
+public interface Inter1 {
+    public abstract void method1();
+    public abstract void method3();
+    public abstract void method2();
+}
