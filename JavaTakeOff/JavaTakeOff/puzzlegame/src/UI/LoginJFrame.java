@@ -8,9 +8,11 @@ import java.util.ArrayList;
 public class LoginJFrame extends JFrame implements MouseListener {
     //创建一个集合存储正确的用户名和密码
     static ArrayList<User> allUsers = new ArrayList<>();
+
     static {
-        allUsers.add(new User("zhangsan","123"));
-        allUsers.add(new User("lisi","1234"));
+        allUsers.add(new User("zhangsan", "123"));
+        allUsers.add(new User("lisi", "1234"));
+        allUsers.add(new User("吴黄进", "12345"));
     }
 
     JButton login = new JButton();
@@ -151,24 +153,24 @@ public class LoginJFrame extends JFrame implements MouseListener {
         //创建一个User对象
         User userInfo = new User(usernameInput, passwordInput);
 
-       if(source == login){
-            if(codeInput.isEmpty()){
+        if (source == login) {
+            if (codeInput.isEmpty()) {
                 showJDialog("验证码不能为空");
-            }else if(usernameInput.isEmpty() || passwordInput.isEmpty()){
+            } else if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
                 showJDialog("用户名或密码不能为空");
-            }else if(!codeInput.equalsIgnoreCase(rightCode.getText())){
+            } else if (!codeInput.equalsIgnoreCase(rightCode.getText())) {
                 showJDialog("验证码错误");
-            }else if(contains(userInfo)){
+            } else if (contains(userInfo)) {
                 //关闭登录窗口
                 this.setVisible(false);
                 //进入游戏窗口
                 new GameJFrame();
-            }else {
+            } else {
                 showJDialog("用户名或密码错误");
             }
-        }else if(source == register){
+        } else if (source == register) {
             System.out.println("点击了注册按钮");
-        } else if(source == rightCode){
+        } else if (source == rightCode) {
             codeStr = createCaptcha.createCaptchaCode();
             //设置内容
             rightCode.setText(codeStr);
@@ -178,9 +180,9 @@ public class LoginJFrame extends JFrame implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Object source = e.getSource();
-        if(source == login){
+        if (source == login) {
             login.setIcon(new ImageIcon("JavaTakeOff\\puzzlegame\\image\\login\\登录按下.png"));
-        }else if(source == register){
+        } else if (source == register) {
             register.setIcon(new ImageIcon("JavaTakeOff\\puzzlegame\\image\\login\\注册按下.png"));
         }
     }
@@ -188,9 +190,9 @@ public class LoginJFrame extends JFrame implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         Object source = e.getSource();
-        if(source == login){
+        if (source == login) {
             login.setIcon(new ImageIcon("JavaTakeOff\\puzzlegame\\image\\login\\登录按钮.png"));
-        }else if(source == register){
+        } else if (source == register) {
             register.setIcon(new ImageIcon("JavaTakeOff\\puzzlegame\\image\\login\\注册按钮.png"));
         }
     }
@@ -206,10 +208,10 @@ public class LoginJFrame extends JFrame implements MouseListener {
     }
 
     //判断用户在集合中是否存在
-    public boolean contains(User userInput){
+    public boolean contains(User userInput) {
         for (int i = 0; i < allUsers.size(); i++) {
             User rightUser = allUsers.get(i);
-            if(userInput.getUsername().equals(rightUser.getUsername()) && userInput.getPassword().equals(rightUser.getPassword())){
+            if (userInput.getUsername().equals(rightUser.getUsername()) && userInput.getPassword().equals(rightUser.getPassword())) {
                 //有相同的代表存在，返回true，后面的不需要再比了
                 return true;
             }

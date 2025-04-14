@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 
-public class GameJFrame extends JFrame implements KeyListener , MouseListener {
+public class GameJFrame extends JFrame implements KeyListener, MouseListener {
     //JFrame界面，窗体
     //子类呢？也表示界面，窗体
     //规定：GameJFrame这个界面表示的就是游戏的主界面
@@ -30,10 +30,10 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
     //创建游戏胜利数组
     int[][] win = {
-        {1,2,3,4},
-        {5,6,7,8},
-        {9,10,11,12},
-        {13,14,15,0},
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0},
     };
 
     //创建一个成员变量来统计步数
@@ -50,8 +50,8 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
     JMenuItem accountItem = new JMenuItem("公众号");
 
-    public GameJFrame(){
-        
+    public GameJFrame() {
+
         //初始化界面
         initJFrame();
 
@@ -63,12 +63,12 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
         //初始化图片
         initImage();
-        
+
         //让界面显示出来
         this.setVisible(true);
     }
 
-    public void viewTheOriginalImage(){
+    public void viewTheOriginalImage() {
         //清除所有图片
         this.getContentPane().removeAll();
 
@@ -77,14 +77,14 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         JLabel allpicture = new JLabel(all);
         this.getContentPane().add(allpicture);
 
-        allpicture.setBounds(83,134,420,420);
+        allpicture.setBounds(83, 134, 420, 420);
 
         //添加背景图片
         ImageIcon bg = new ImageIcon("JavaTakeOff\\puzzlegame\\image\\background.png");
         JLabel background = new JLabel(bg);
         this.getContentPane().add(background);
 
-        background.setBounds(40,40,508,560);
+        background.setBounds(40, 40, 508, 560);
 
         //刷新图片
         this.getContentPane().repaint();
@@ -92,10 +92,10 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
     private void initData() {
         //定义一个数组
-        int[]tempArr={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        int[] tempArr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
         //创建随机数
         Random random = new Random();
-        for (int i = 0; i <4; i++) {
+        for (int i = 0; i < 4; i++) {
             int randomIndex = random.nextInt(tempArr.length);
             int temp;
             temp = tempArr[i];
@@ -106,7 +106,7 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         int index = 0;
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
-                if(tempArr[index] == 0){
+                if (tempArr[index] == 0) {
                     x = i;
                     y = j;
                 }
@@ -124,14 +124,14 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         ImageIcon winner = new ImageIcon("JavaTakeOff\\puzzlegame\\image\\win.png");
         JLabel victory = new JLabel(winner);
         boolean victory1 = victory();
-        if(victory1){
+        if (victory1) {
             this.getContentPane().add(victory);
-            victory.setBounds(203,283,197,73);
+            victory.setBounds(203, 283, 197, 73);
         }
 
         //将步数显示到游戏中
-        JLabel stepcount = new JLabel("步数："+step);
-        stepcount.setBounds(50,30,100,20);
+        JLabel stepcount = new JLabel("步数：" + step);
+        stepcount.setBounds(50, 30, 100, 20);
         this.getContentPane().add(stepcount);
 
         //路径分为两种：
@@ -139,7 +139,6 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         //相对路径：不是从盘符开始的
         //相对路径相对当前项目而言的。  aaa\\bbb
         //在当前项目下，去找aaa文件夹，里面再找bbb文件夹。
-
 
 
         //细节：
@@ -158,7 +157,7 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
                 JLabel jLabel = new JLabel(new ImageIcon(path + number + ".jpg"));
 
                 //设置图片坐标
-                jLabel.setBounds(105*j+83,105*i+134,105,105);
+                jLabel.setBounds(105 * j + 83, 105 * i + 134, 105, 105);
 
                 //给小图片设置边框
                 //0:表示让图片凸起来(RAISED)
@@ -179,7 +178,7 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         JLabel background = new JLabel(bg);
         this.getContentPane().add(background);
 
-        background.setBounds(40,40,508,560);
+        background.setBounds(40, 40, 508, 560);
 
 
         //刷新界面
@@ -188,7 +187,7 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
     private void initJFrame() {
         //设置游戏界面大小
-        this.setSize(603,680);
+        this.setSize(603, 680);
 
         //设置游戏标题
         this.setTitle("拼图游戏单机版v1.0");
@@ -214,7 +213,6 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         JMenu functionMenu = new JMenu("功能");
         JMenu usMenu = new JMenu("关于我们");
         JMenu changePictureMenu = new JMenu("更换图片");
-
 
 
         //给条目添加鼠标监听
@@ -257,14 +255,14 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
     public void keyPressed(KeyEvent e) {
 
         //游戏胜利就结束所有操作
-        if(victory()){
+        if (victory()) {
             return;
         }
 
-        
+
         int keyCode = e.getKeyCode();
         //查看完整图片
-        if(keyCode == 65){
+        if (keyCode == 65) {
             viewTheOriginalImage();
         }
     }
@@ -272,7 +270,7 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
     @Override
     public void keyReleased(KeyEvent e) {
         //游戏胜利就结束所有操作
-        if(victory()){
+        if (victory()) {
             return;
         }
 
@@ -283,72 +281,72 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
 
         //对上，下，左，右进行判断
         //左：37上：38右：39下：40
-        if(keyCode == 37){
-            if(y == 3){
+        if (keyCode == 37) {
+            if (y == 3) {
                 return;
             }
             System.out.println("向左");
-            data[x][y] = data[x][y+1];
-            data[x][y+1] = 0;
+            data[x][y] = data[x][y + 1];
+            data[x][y + 1] = 0;
             y++;
             //每移动一次步数加1
             step++;
             initImage();
         } else if (keyCode == 38) {
-            if(x == 3){
+            if (x == 3) {
                 return;
             }
             System.out.println("向上");
             //逻辑：
-        //把空白方块下方的数字往上移动
-        //x,y表示空白方块
-        //×+1,y表示空白方块下方的数字
-            data[x][y] = data[x+1][y];
-            data[x+1][y] = 0;
+            //把空白方块下方的数字往上移动
+            //x,y表示空白方块
+            //×+1,y表示空白方块下方的数字
+            data[x][y] = data[x + 1][y];
+            data[x + 1][y] = 0;
             x++;
             //每移动一次步数加1
             step++;
             initImage();
-        }else if(keyCode == 39){
-            if(y == 0){
+        } else if (keyCode == 39) {
+            if (y == 0) {
                 return;
             }
             System.out.println("向右");
-            data[x][y] = data[x][y-1];
-            data[x][y-1] = 0;
+            data[x][y] = data[x][y - 1];
+            data[x][y - 1] = 0;
             y--;
             //每移动一次步数加1
             step++;
             initImage();
-        }else if(keyCode == 40){
-            if(x == 0){
+        } else if (keyCode == 40) {
+            if (x == 0) {
                 return;
             }
             System.out.println("向下");
-            data[x][y] = data[x-1][y];
-            data[x-1][y] = 0;
+            data[x][y] = data[x - 1][y];
+            data[x - 1][y] = 0;
             x--;
             //每移动一次步数加1
             step++;
             initImage();
-        }else if(keyCode == 65){
+        } else if (keyCode == 65) {
             initImage();
-        }else if(keyCode == 87){
+        } else if (keyCode == 87) {
             data = new int[][]{
-                    {1,2,3,4},
-                    {5,6,7,8},
-                    {9,10,11,12},
-                    {13,14,15,0},
+                    {1, 2, 3, 4},
+                    {5, 6, 7, 8},
+                    {9, 10, 11, 12},
+                    {13, 14, 15, 0},
             };
             initImage();
         }
     }
 
     //判断游戏是否胜利
-    public boolean victory(){
+    public boolean victory() {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
-                if(data[i][j] != win[i][j]){
+                if (data[i][j] != win[i][j]) {
                     return false;
                 }
             }
@@ -372,21 +370,21 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
         Random random = new Random();
 
         Object source = e.getSource();
-        if(source == rePlayItem){
+        if (source == rePlayItem) {
             //步数清零
             step = 0;
 
             initData();
 
             initImage();
-        }else if(source == reLoginItem){
+        } else if (source == reLoginItem) {
             //关闭当前的游戏界面
             this.setVisible(false);
             //打开登录界面
             new LoginJFrame();
-        }else if(source == closeItem){
+        } else if (source == closeItem) {
             System.exit(0);
-        }else if(source == accountItem){
+        } else if (source == accountItem) {
             //创建一个弹窗对象
             JDialog jDialog = new JDialog();
 
@@ -394,12 +392,12 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
             //创建图片对象
             ImageIcon account = new ImageIcon("JavaTakeOff\\puzzlegame\\image\\about.png");
             JLabel jLabel = new JLabel(account);
-            jLabel.setBounds(0,0,258,258);
+            jLabel.setBounds(0, 0, 258, 258);
             jDialog.getContentPane().add(jLabel);
 
 
             //设置弹窗大小
-            jDialog.setSize(344,344);
+            jDialog.setSize(344, 344);
             //弹窗置顶
             jDialog.setAlwaysOnTop(true);
             //弹窗居中
@@ -409,20 +407,20 @@ public class GameJFrame extends JFrame implements KeyListener , MouseListener {
             //将弹窗显示在界面上
             jDialog.setVisible(true);
 
-        }else if(source == girlItem){
-            path = "JavaTakeOff\\puzzlegame\\image\\girl\\girl"+(random.nextInt(13)+1)+"\\";
+        } else if (source == girlItem) {
+            path = "JavaTakeOff\\puzzlegame\\image\\girl\\girl" + (random.nextInt(13) + 1) + "\\";
             //步数清零
             step = 0;
             initData();
             initImage();
-        }else if(source == animalItem){
-            path = "JavaTakeOff\\puzzlegame\\image\\animal\\animal"+(random.nextInt(8)+1)+"\\";
+        } else if (source == animalItem) {
+            path = "JavaTakeOff\\puzzlegame\\image\\animal\\animal" + (random.nextInt(8) + 1) + "\\";
             //步数清零
             step = 0;
             initData();
             initImage();
-        }else if(source == sportItem){
-            path = "JavaTakeOff\\puzzlegame\\image\\sport\\sport"+(random.nextInt(10)+1)+"\\";
+        } else if (source == sportItem) {
+            path = "JavaTakeOff\\puzzlegame\\image\\sport\\sport" + (random.nextInt(10) + 1) + "\\";
             //步数清零
             step = 0;
             initData();
