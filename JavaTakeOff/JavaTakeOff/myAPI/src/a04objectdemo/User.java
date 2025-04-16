@@ -89,19 +89,22 @@ public class User implements Cloneable{
         //调用父类中的clone方法
         //相当于让Java帮我们克隆一个对象，并把克隆之后的对象返回出去
 
+//
+//        //获取数组
+//        int[] data = this.data;
+//        //创建一个新数组
+//        int [] newdata = new int[data.length];
+//        //将数组克隆到新数组中
+//        for (int i = 0; i < data.length; i++) {
+//            newdata[i] = data[i];
+//        }
+//        //调用父类中的方法克隆对象
+//        User u = (User) super.clone();
+//        //因为父类中的克隆方法克隆出来对象中的数组地址值
+//        u.data = newdata;
+//        return u;
 
-        //获取数组
-        int[] data = this.data;
-        //创建一个新数组
-        int [] newdata = new int[data.length];
-        //将数组克隆到新数组中
-        for (int i = 0; i < data.length; i++) {
-            newdata[i] = data[i];
-        }
-        //调用父类中的方法克隆对象
-        User u = (User) super.clone();
-        //因为父类中的克隆方法克隆出来对象中的数组地址值
-        u.data = newdata;
-        return u;
+        return super.clone();
+
     }
 }
