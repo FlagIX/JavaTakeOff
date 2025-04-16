@@ -1,4 +1,4 @@
-package a01mathdemo1;
+package a01mathdemo;
 
 public class MathTest01 {
     public static void main(String[] args) {
