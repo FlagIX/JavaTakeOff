@@ -9,7 +9,7 @@ public class a10ChronoUnitDemo {
         LocalDateTime today = LocalDateTime.now();
         System.out.println(today);
         // 生日时间
-        LocalDateTime birthDate = LocalDateTime.of(2000, 1, 1,
+        LocalDateTime birthDate = LocalDateTime.of(2005, 10, 18,
                 0, 0, 0);
         System.out.println(birthDate);
 
