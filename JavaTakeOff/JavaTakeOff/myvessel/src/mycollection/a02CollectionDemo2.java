@@ -3,7 +3,7 @@ package mycollection;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class a01CollectionDemo2 {
+public class a02CollectionDemo2 {
     public static void main(String[] args) {
         //创建一个集合
         Collection<Student> coll = new ArrayList<>();
