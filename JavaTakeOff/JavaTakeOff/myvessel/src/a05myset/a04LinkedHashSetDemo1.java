@@ -6,13 +6,13 @@ public class a04LinkedHashSetDemo1 {
     public static void main(String[] args) {
 
         //创建学生对象
-        Student s1 = new Student("zhangsan",23);
-        Student s2 = new Student("lisi",24);
-        Student s3 = new Student("wangwu",25);
-        Student s4 = new Student("zhangsan",23);
+        Student1 s1 = new Student1("zhangsan",23);
+        Student1 s2 = new Student1("lisi",24);
+        Student1 s3 = new Student1("wangwu",25);
+        Student1 s4 = new Student1("zhangsan",23);
 
         //创建集合并添加元素
-        LinkedHashSet<Student> lhs = new LinkedHashSet<>();
+        LinkedHashSet<Student1> lhs = new LinkedHashSet<>();
 
         System.out.println(lhs.add(s1));
         System.out.println(lhs.add(s2));
