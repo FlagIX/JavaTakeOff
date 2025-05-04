@@ -9,13 +9,13 @@ public class a03HashSetDemo2 {
         //要求：学生对象的成员变量值相同，我们就认为是同一个对象
 
         //创建hashset集合
-        HashSet<Student> hs = new HashSet<>();
+        HashSet<Student1> hs = new HashSet<>();
 
         //创建学生对象
-        Student s1 = new Student("zhangsan",23);
-        Student s2 = new Student("lisi",24);
-        Student s3 = new Student("wangwu",25);
-        Student s4 = new Student("zhangsan",23);
+        Student1 s1 = new Student1("zhangsan",23);
+        Student1 s2 = new Student1("lisi",24);
+        Student1 s3 = new Student1("wangwu",25);
+        Student1 s4 = new Student1("zhangsan",23);
 
         //向集合添加元素
         System.out.println(hs.add(s1));

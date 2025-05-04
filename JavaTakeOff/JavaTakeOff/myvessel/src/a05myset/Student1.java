@@ -2,14 +2,14 @@ package a05myset;
 
 import java.util.Objects;
 
-public class Student {
+public class Student1 {
     private String name;
     private int age;
 
-    public Student() {
+    public Student1() {
     }
 
-    public Student(String name, int age) {
+    public Student1(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -50,7 +50,7 @@ public class Student {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
+        Student1 student = (Student1) o;
         return age == student.age && Objects.equals(name, student.name);
     }
 
