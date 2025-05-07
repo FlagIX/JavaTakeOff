@@ -1,4 +1,4 @@
-package a01mymap;
+package a02myhashmap;
 
 import java.util.HashMap;
 import java.util.Map;
