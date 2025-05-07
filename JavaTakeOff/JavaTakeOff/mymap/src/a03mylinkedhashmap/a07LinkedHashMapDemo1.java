@@ -1,4 +1,4 @@
-package a01mymap;
+package a03mylinkedhashmap;
 
 import java.util.LinkedHashMap;
 
