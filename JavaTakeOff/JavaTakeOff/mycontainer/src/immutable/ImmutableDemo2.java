@@ -1,4 +1,4 @@
-package a01immutable;
+package immutable;
 
 import java.util.Set;
 
