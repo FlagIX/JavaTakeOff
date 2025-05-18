@@ -11,9 +11,9 @@ public class Test1 {
 
             try {
                 System.out.println("请输入名字");
-                gf1.setName(sc.next());
+                gf1.setName(sc.nextLine());
                 System.out.println("请输入年龄");
-                gf1.setAge(sc.nextInt());
+                gf1.setAge(Integer.parseInt(sc.nextLine()));
                 break;
             }catch (NumberFormatException e){
                 e.printStackTrace();
@@ -21,5 +21,8 @@ public class Test1 {
                 e.printStackTrace();
             }
         }
+
+        //打印
+        System.out.println(gf1);
     }
 }
