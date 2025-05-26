@@ -3,3 +3,5 @@
 *.iml
 */out/
 .vscode/
+
+/JavaTakeOff/JavaTakeOff/myio/*.txt
