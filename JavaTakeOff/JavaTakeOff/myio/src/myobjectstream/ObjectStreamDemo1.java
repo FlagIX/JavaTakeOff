@@ -16,7 +16,7 @@ public class ObjectStreamDemo1 {
             public final void writeobject   (object obj)        把对象序列化（写出）到文件中去
 */
         //1.创建对象
-        Student stu = new Student("zhangsan",23);
+        Student stu = new Student("zhangsan",23,"湖南");
         //2.创建序列化流/对象操作输出流
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("JavaTakeOff\\myio\\a.txt"));
         //3.将对象写入文件
