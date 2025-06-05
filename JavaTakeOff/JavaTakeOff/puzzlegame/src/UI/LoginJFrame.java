@@ -1,19 +1,16 @@
 package UI;
 
+import cn.hutool.core.io.FileUtil;
+
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginJFrame extends JFrame implements MouseListener {
     //创建一个集合存储正确的用户名和密码
     static ArrayList<User> allUsers = new ArrayList<>();
-
-    static {
-        allUsers.add(new User("zhangsan", "123"));
-        allUsers.add(new User("lisi", "1234"));
-        allUsers.add(new User("吴黄进", "12345"));
-    }
 
     JButton login = new JButton();
 
@@ -31,6 +28,9 @@ public class LoginJFrame extends JFrame implements MouseListener {
     String codeStr = "";
 
     public LoginJFrame() {
+        //读取本地用户信息
+        readUserInfo();
+
         //初始化界面
         initJFrame();
 
@@ -39,6 +39,17 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
         //让当前界面显示出来
         this.setVisible(true);
+    }
+
+    //读取本地用户信息
+    private void readUserInfo() {
+        List<String> userInfoList = FileUtil.readUtf8Lines("E:\\Java_space\\JavaTakeOff\\JavaTakeOff\\JavaTakeOff\\puzzlegame\\userinfo.txt");
+        for (String s : userInfoList) {
+            String[] userInfoArr = s.split("&");
+            String[] username = userInfoArr[0].split("=");
+            String[] password = userInfoArr[1].split("=");
+            allUsers.add(new User(username[1],password[1]));
+        }
     }
 
     public void initView() {
