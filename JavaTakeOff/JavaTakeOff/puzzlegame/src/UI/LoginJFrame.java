@@ -180,7 +180,10 @@ public class LoginJFrame extends JFrame implements MouseListener {
                 showJDialog("用户名或密码错误");
             }
         } else if (source == register) {
-            System.out.println("点击了注册按钮");
+            //关闭登录窗口
+            this.setVisible(false);
+            //进入注册窗口
+            new RegisterJFrame(allUsers);
         } else if (source == rightCode) {
             codeStr = createCaptcha.createCaptchaCode();
             //设置内容

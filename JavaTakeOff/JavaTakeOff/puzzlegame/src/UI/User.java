@@ -14,6 +14,7 @@ public class User {
 
     /**
      * 获取
+     *
      * @return Username
      */
     public String getUsername() {
@@ -22,6 +23,7 @@ public class User {
 
     /**
      * 设置
+     *
      * @param Username
      */
     public void setUsername(String Username) {
@@ -30,6 +32,7 @@ public class User {
 
     /**
      * 获取
+     *
      * @return password
      */
     public String getPassword() {
@@ -38,6 +41,7 @@ public class User {
 
     /**
      * 设置
+     *
      * @param password
      */
     public void setPassword(String password) {
@@ -45,6 +49,6 @@ public class User {
     }
 
     public String toString() {
-        return "User{Username = " + Username + ", password = " + password + "}";
+        return "username=" + Username + "&password=" + password;
     }
 }
