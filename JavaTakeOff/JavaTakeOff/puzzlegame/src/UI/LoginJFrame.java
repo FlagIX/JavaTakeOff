@@ -5,12 +5,19 @@ import cn.hutool.core.io.FileUtil;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginJFrame extends JFrame implements MouseListener {
     //创建一个集合存储正确的用户名和密码
-    static ArrayList<User> allUsers = new ArrayList<>();
+    ArrayList<User> allUsers = new ArrayList<>();
+    List<String> userInfoList;
+    ArrayList<String> usernameList = new ArrayList<>();
+    ArrayList<String> passwordList = new ArrayList<>();
+    ArrayList<String> countList = new ArrayList<>();
 
     JButton login = new JButton();
 
@@ -43,12 +50,16 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
     //读取本地用户信息
     private void readUserInfo() {
-        List<String> userInfoList = FileUtil.readUtf8Lines("E:\\Java_space\\JavaTakeOff\\JavaTakeOff\\JavaTakeOff\\puzzlegame\\userinfo.txt");
+        userInfoList = FileUtil.readUtf8Lines("E:\\Java_space\\JavaTakeOff\\JavaTakeOff\\JavaTakeOff\\puzzlegame\\userinfo.txt");
         for (String s : userInfoList) {
             String[] userInfoArr = s.split("&");
             String[] username = userInfoArr[0].split("=");
             String[] password = userInfoArr[1].split("=");
-            allUsers.add(new User(username[1],password[1]));
+            String[] count = userInfoArr[2].split("=");
+            allUsers.add(new User(username[1], password[1]));
+            usernameList.add(username[1]);
+            passwordList.add(password[1]);
+            countList.add(count[1]);
         }
     }
 
@@ -165,19 +176,39 @@ public class LoginJFrame extends JFrame implements MouseListener {
         User userInfo = new User(usernameInput, passwordInput);
 
         if (source == login) {
+            int index = usernameList.indexOf(username.getText());
+            int count = Integer.parseInt(countList.get(index));
+            if(count >= 3){
+                showJDialog("该账户已被锁定");
+                return;
+            }
             if (codeInput.isEmpty()) {
                 showJDialog("验证码不能为空");
             } else if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
                 showJDialog("用户名或密码不能为空");
             } else if (!codeInput.equalsIgnoreCase(rightCode.getText())) {
                 showJDialog("验证码错误");
+            } else if (index == -1) {
+                showJDialog("该用户不存在，请先注册");
             } else if (contains(userInfo)) {
+                showJDialog("登陆成功");
+                count = 0;
+                countList.set(index,String.valueOf(count));
+
+
+
                 //关闭登录窗口
                 this.setVisible(false);
                 //进入游戏窗口
                 new GameJFrame();
             } else {
-                showJDialog("用户名或密码错误");
+                count++;
+                countList.set(index, String.valueOf(count));
+                if(count >= 3){
+                    showJDialog("错误超出三次，账户锁定");
+                }else {
+                    showJDialog("用户名或密码错误，剩余"+(3 - count)+"次机会");
+                }
             }
         } else if (source == register) {
             //关闭登录窗口
@@ -188,6 +219,31 @@ public class LoginJFrame extends JFrame implements MouseListener {
             codeStr = createCaptcha.createCaptchaCode();
             //设置内容
             rightCode.setText(codeStr);
+        }
+
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter("E:\\Java_space\\JavaTakeOff\\JavaTakeOff\\JavaTakeOff\\puzzlegame\\userinfo.txt"));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        for (int i = 0; i < usernameList.size(); i++) {
+            String user = "username="+usernameList.get(i)+"&password="+passwordList.get(i)+"&count="+countList.get(i);
+            try {
+                bw.write(user);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            try {
+                bw.newLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        try {
+            bw.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
